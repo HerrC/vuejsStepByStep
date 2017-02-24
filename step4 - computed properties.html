@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <style>
+        .color-red {
+            color: red;
+        }
+        
+        .color-green {
+            color: greenyellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root">
+        <h1>All tasks</h1>
+        <ul>
+            <li v-for="task in tasks">{{task.description}}</li>
+        </ul>
+
+        <h1>Completed tasks with if</h1>
+        <ul>
+            <li v-for="task in tasks" v-if="task.completed">{{task.description}}</li>
+        </ul>
+        <h1>Incomplete tasks with computed value</h1>
+        <ul>
+            <li v-for="task in incompleteTasks" >{{task.description}}</li>
+        </ul>
+    </div>
+    <script src="https://unpkg.com/vue@2.1.10/dist/vue.js"></script>
+
+    <script>
+        var app = new Vue({
+            el: '#root',
+            data: {
+                tasks: [
+                    { description: 'Go to the store', completed: true },
+                    { description: 'Finish screencast', completed: true },
+                    { description: 'Make donation', completed: false },
+                    { description: 'Clear inbox', completed: true },
+                    { description: 'Make dinner', completed: false }
+                ]
+
+            },
+            methods: {
+            },
+            computed: {
+                incompleteTasks() {
+                    // filterd version of tasks
+                    return this.tasks.filter(task => !task.completed);
+                }
+            }
+
+        });
+    </script>
+</body>
+
+</html>
